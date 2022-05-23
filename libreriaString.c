@@ -8,7 +8,7 @@ char* myStrcpySofi (char* nombrePersona, char* apellidoPersona);
 char* myStrncatSofi (char* cadenaUno, char* cadenaDos, int cantidadLetras);
 int myStrcmp (char* primeraCadena, char* segundaCadena);
 int myStrncmp (char* cadenaUno, char* cadenaDos, int contadorCaracteres);
-int h=0;
+
 void main(){
  	
  	char nombre[20];
