@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegistroActivity">
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="Registro usuario"
+        android:textAlignment="center"
+        android:textColor="@color/cardview_dark_background"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/cedula"
+        android:layout_width="197dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="32dp"
+        android:hint="Cedula"
+        android:inputType="number"
+        android:maxLength="10"
+        android:textSize="20dp"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/NombrePersonName2" />
+
+    <EditText
+        android:id="@+id/clave"
+        android:layout_width="197dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="32dp"
+        android:hint="Clave"
+        android:inputType="textPassword"
+        android:textSize="20dp"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cedula" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="198dp"
+        android:layout_height="51dp"
+        android:layout_marginTop="50dp"
+        android:text="Para continuar el registro deposite minimo 1000"
+        android:textAlignment="center"
+        android:textSize="15dp"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/clave" />
+
+    <EditText
+        android:id="@+id/deposito"
+        android:layout_width="197dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="50dp"
+        android:hint="Deposito"
+        android:inputType="number"
+        android:textSize="20dp"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+    <EditText
+        android:id="@+id/deposito_confirma"
+        android:layout_width="196dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="32dp"
+        android:hint="Confirmar deposito"
+        android:inputType="number"
+        android:textSize="20dp"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/deposito" />
+
+    <Button
+        android:id="@+id/registro"
+        android:layout_width="121dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="32dp"
+        android:text="registrar"
+        android:textSize="15dp"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toStartOf="@+id/bntVolver"
+        app:layout_constraintHorizontal_bias="0.39"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/deposito_confirma" />
+
+    <EditText
+        android:id="@+id/NombrePersonName2"
+        android:layout_width="188dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="36dp"
+        android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz "
+        android:ems="10"
+        android:hint="Nombre"
+        android:textSize="20dp"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+    <Button
+        android:id="@+id/bntVolver"
+        android:layout_width="121dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="68dp"
+        android:text="Volver"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/deposito_confirma" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

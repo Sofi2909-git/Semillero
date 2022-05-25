@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:text="PAGUE SUS SERVICIOS"
+        android:textColor="@color/cardview_dark_background"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        app:flow_horizontalAlign="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+
+    <EditText
+        android:id="@+id/cedulaI"
+        android:layout_width="188dp"
+        android:layout_height="61dp"
+        android:layout_marginTop="64dp"
+        android:inputType="number"
+        android:textSize="20dp"
+        android:hint="Número de cédula"
+        android:maxLength="10"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <EditText
+        android:id="@+id/claveI"
+        android:layout_width="188dp"
+        android:layout_height="61dp"
+        android:layout_marginTop="64dp"
+        android:ems="10"
+        android:hint="Clave"
+        android:textSize="20dp"
+        android:inputType="textPassword"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cedulaI" />
+
+    <Button
+        android:id="@+id/inicio"
+        android:layout_width="121dp"
+        android:layout_height="57dp"
+        android:layout_marginStart="56dp"
+        android:layout_marginTop="64dp"
+        android:textStyle="normal"
+        android:textSize="15dp"
+        android:text="Inicio sesion"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/claveI" />
+
+    <Button
+        android:id="@+id/registrar"
+        android:layout_width="121dp"
+        android:layout_height="57dp"
+        android:layout_marginTop="64dp"
+        android:text="REGISTRAR"
+        android:textSize="14dp"
+        android:textStyle="normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.663"
+        app:layout_constraintStart_toEndOf="@+id/inicio"
+        app:layout_constraintTop_toBottomOf="@+id/claveI" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/pago" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/no"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DepositarActivity">
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="DEPOSITAR"
+        android:textColor="@color/cardview_dark_background"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
+
+    <EditText
+        android:id="@+id/identificacion"
+        android:layout_width="198dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="32dp"
+        android:hint="Cédula"
+        android:inputType="number"
+        android:maxLength="10"
+        android:textSize="20dp"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Saldo:"
+        android:layout_marginTop="32dp"
+        android:textSize="20dp"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toStartOf="@+id/saldo"
+        app:layout_constraintHorizontal_bias="0.716"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/identificacion" />
+
+    <TextView
+        android:id="@+id/saldo"
+        android:layout_width="174dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="116dp"
+        android:hint="Saldo"
+        android:textSize="20dp"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/identificacion" />
+
+    <EditText
+        android:id="@+id/monto_Deposito"
+        android:layout_width="198dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="32dp"
+        android:ems="10"
+        android:hint="Monto a depositar"
+        android:inputType="number"
+        android:textSize="20dp"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/saldo" />
+
+    <EditText
+        android:id="@+id/monto_confirma_De"
+        android:layout_width="198dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="32dp"
+        android:ems="10"
+        android:hint="Confirmar monto"
+        android:inputType="number"
+        android:textSize="20dp"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/monto_Deposito" />
+
+    <Button
+        android:id="@+id/button_Depositar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="64dp"
+        android:text="Ok"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/monto_confirma_De" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/billetes" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
