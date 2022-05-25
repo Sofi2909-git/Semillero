@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Recarga de celulares</string>
+    <string name="text_view">Inicio de sesion</string>
+    <string name="text_view2">Registro usuario</string>
+</resources>
