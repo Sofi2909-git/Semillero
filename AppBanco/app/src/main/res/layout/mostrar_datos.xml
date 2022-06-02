@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:id="@+id/vistaDatosid"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:textSize="18dp"
+        android:textStyle="italic"
+        android:text="Datos" />
+
+    <TextView
+        android:id="@+id/vistaDatostype"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textSize="18dp"
+        android:textStyle="italic"
+        android:text="Datos" />
+
+    <TextView
+        android:id="@+id/vistaDatosamount"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textSize="18dp"
+        android:textStyle="italic"
+        android:textAlignment="viewStart"
+        android:text="Datos" />
+
+    <TextView
+        android:id="@+id/vistaDatosdescription"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textSize="18dp"
+        android:textStyle="italic"
+        android:text="Datos" />
+
+    <TextView
+        android:id="@+id/vistaDatosdate"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:textSize="18dp"
+        android:textStyle="italic"
+        android:text="Datos" />
+
+
+
+
+</LinearLayout>
