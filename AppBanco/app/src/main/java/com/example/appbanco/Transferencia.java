@@ -45,11 +45,22 @@ public class Transferencia extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityTransferenciaBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
+        onClick();
+    }
+    private void onClick() {
+        recibirParametros();
+        Transferencia();
+    }
+    private void recibirParametros() {
         Bundle parametros = this.getIntent().getExtras();
+        usuarios.setName(parametros.getString("user_name"));
+        usuarios.setIdentificacion(parametros.getString("user_identification"));
+        usuarios.setMail(parametros.getString("user_email"));
         usuarios.setNumeroCuenta(parametros.getString("numCuenta"));
         usuarios.setToken(parametros.getString("token"));
-
+        usuarios.setSaldo(parametros.getInt("bill_amount"));
+    }
+    private void Transferencia(){
         binding.btnTransferencia.setOnClickListener(view -> {
 
             numberBillR = binding.cuentaTransferir.getText().toString();
@@ -58,18 +69,21 @@ public class Transferencia extends AppCompatActivity {
             numberBillE = usuarios.getNumeroCuenta();
             token = usuarios.getToken();
             request = Volley.newRequestQueue(getBaseContext());
+            int saldo=Integer.parseInt(amount);
 
             if (numberBillR.isEmpty() && amount.isEmpty() && confirmAmount.isEmpty()) {
                 Toast.makeText(this, "Llene todos los campos", Toast.LENGTH_LONG).show();
             } else if (!amount.equals(confirmAmount)) {
                 Toast.makeText(this, "Vefirifique el monto", Toast.LENGTH_SHORT).show();
-            } else {
+            }  else if (saldo<1000) {
+                Toast.makeText(this, "Monto minimo de mil", Toast.LENGTH_SHORT).show();
+             //  pDialog.dismiss();
+            }else {
                 dialogo("Transfiriendo");
                 cargarWebService();
             }
         });
     }
-
     private void cargarWebService() {
 
         HashMap<String, String> paramsAuth = new HashMap<>();
@@ -94,8 +108,7 @@ public class Transferencia extends AppCompatActivity {
                                         .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialog, int which) {
-                                                Intent intent = new Intent(Transferencia.this, OperacionesBancarias.class);
-                                                startActivity(intent);
+                                              volverOperaciones();
                                             }
                                         }).show();
                             } else {
@@ -123,7 +136,18 @@ public class Transferencia extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-
+    private void volverOperaciones() {
+        Intent intent = new Intent(Transferencia.this, OperacionesBancarias.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("user_name", usuarios.getName());
+        bundle.putString("user_identification", usuarios.getIdentificacion());
+        bundle.putString("user_email", usuarios.getMail());
+        bundle.putString("numCuenta", usuarios.getNumeroCuenta());
+        bundle.putInt("bill_amount", usuarios.getSaldo());
+        bundle.putString("token", usuarios.getToken());
+        intent.putExtras(bundle);
+        startActivity(intent);
+    }
     private void dialogo(String mensage) {
         pDialog = new ProgressDialog(this);
         pDialog.setMessage(mensage);

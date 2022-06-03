@@ -35,9 +35,16 @@ public class LoginUsuario extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        binding=ActivityLoginUsuarioBinding.inflate(getLayoutInflater());
+        binding = ActivityLoginUsuarioBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        onClick();
+    }
 
+    private void onClick() {
+        inicio();
+        volver();
+    }
+    private void inicio(){
         binding.btnIniciar.setOnClickListener(view -> {
             mail = binding.correoI.getText().toString();
             password = binding.claveI.getText().toString();
@@ -48,13 +55,13 @@ public class LoginUsuario extends AppCompatActivity {
                 cargarWebService();
             }
         });
-
-        binding.btnvolverI.setOnClickListener(view->{
+    }
+    private void volver(){
+        binding.btnvolverI.setOnClickListener(view -> {
             Intent intentMain = new Intent(this, MainActivity.class);
             startActivity(intentMain);
         });
     }
-
     private void cargarWebService() {
 
         HashMap<String, String> paramsAuth = new HashMap<>();
@@ -80,7 +87,7 @@ public class LoginUsuario extends AppCompatActivity {
                                 JSONObject bill = data.optJSONObject("bill");
                                 usuarios.setSaldo(bill.optInt("bill_amount"));
                                 String pasar = String.valueOf(bill.optLong("bill_number"));
-                                System.out.println("TOKEN::: "  + response.optString("token"));
+                                System.out.println("TOKEN::: " + response.optString("token"));
                                 usuarios.setToken(response.optString("token"));
                                 usuarios.setNumeroCuenta(pasar);
 
@@ -94,6 +101,7 @@ public class LoginUsuario extends AppCompatActivity {
                         @Override
                         public void onErrorResponse(VolleyError error) {
                             Log.e("Error", "onErrorResponse: " + error.toString());
+
                         }
                     }) {
 
@@ -103,20 +111,18 @@ public class LoginUsuario extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-
     private void envieOperaciones() {
         Intent intent = new Intent(this, OperacionesBancarias.class);
         Bundle bundle = new Bundle();
 
-        bundle.putString("user_name",usuarios.getName() );
-        bundle.putString("user_identification",usuarios.getIdentificacion() );
-        bundle.putString("user_email",usuarios.getMail() );
+        bundle.putString("user_name", usuarios.getName());
+        bundle.putString("user_identification", usuarios.getIdentificacion());
+        bundle.putString("user_email", usuarios.getMail());
         bundle.putString("numCuenta", usuarios.getNumeroCuenta());
-        bundle.putInt("bill_amount",usuarios.getSaldo() );
-        bundle.putString("token",usuarios.getToken() );
+        bundle.putInt("bill_amount", usuarios.getSaldo());
+        bundle.putString("token", usuarios.getToken());
         intent.putExtras(bundle);
         startActivity(intent);
-
     }
 
 }

@@ -34,14 +34,12 @@ public class RegistroUsuario extends AppCompatActivity {
 
     public static ArrayList<usuario> datosUsuario = new ArrayList<>(); //hago publica y estatica esta lista de datos
     usuario usuarios;
-
     ActivityRegistroUsuarioBinding binding;
 
     String name;
     String id;
     String mail;
     String password;
-
     //establecen la conexiopn con el web service
     RequestQueue request;
     JsonRequest jsonRequest;
@@ -53,12 +51,14 @@ public class RegistroUsuario extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         usuarios = new usuario();
+        onClick();
+    }
+    private void onClick() {
+        registrar();
+        volver();
+    }
 
-        binding.btnVolverR.setOnClickListener(view -> {
-            Intent intentMain = new Intent(this, MainActivity.class);
-            startActivity(intentMain);
-        });
-
+    private void registrar(){
         binding.btnRegistrar.setOnClickListener(view -> {
 
             name = binding.nombreR.getText().toString();
@@ -99,6 +99,12 @@ public class RegistroUsuario extends AppCompatActivity {
         Intent intentMain = new Intent(this, LoginUsuario.class);
         startActivity(intentMain);
     }
+    private void volver(){
+        binding.btnVolverR.setOnClickListener(view -> {
+            Intent intentMain = new Intent(this, MainActivity.class);
+            startActivity(intentMain);
+        });
+    }
 
     private void cargarWebService() {
 
@@ -132,12 +138,14 @@ public class RegistroUsuario extends AppCompatActivity {
                         @Override
                         public void onErrorResponse(VolleyError error) {
                             Log.e("Error", "onErrorResponse: " + error.toString());
+                            Toast.makeText(RegistroUsuario.this, "Error: "+ error.toString(), Toast.LENGTH_SHORT).show();
                         }
                     }) {
 
             };
             request.add(arrayRequest);
         } catch (Exception e) {
+            Toast.makeText(this, "Error: "+ e.toString(), Toast.LENGTH_SHORT).show();
             e.printStackTrace();
         }
     }

@@ -3,15 +3,10 @@ package com.example.appbanco;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.appbanco.databinding.MostrarDatosBinding;
-
 import java.util.ArrayList;
-import java.util.List;
 
 public class AdapterDatos extends RecyclerView.Adapter<AdapterDatos.ViewHolderHistory> {
 

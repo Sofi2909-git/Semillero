@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -44,24 +46,23 @@ public class Cuentas extends AppCompatActivity {
         binding = ActivityCuentasBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         request = Volley.newRequestQueue(getBaseContext());
-
         list = new ArrayList<>();
-
+        onClick();
+    }
+    private void onClick() {
+        recibirParametros();
+        cargarWebService();
+        volverOperaciones();
+    }
+    private void recibirParametros() {
         Bundle parametros = this.getIntent().getExtras();
+        usuarios.setName(parametros.getString("user_name"));
+        usuarios.setIdentificacion(parametros.getString("user_identification"));
+        usuarios.setMail(parametros.getString("user_email"));
         usuarios.setNumeroCuenta(parametros.getString("numCuenta"));
         usuarios.setToken(parametros.getString("token"));
-
-        numeroCuenta = usuarios.getNumeroCuenta();
-        token = usuarios.getToken();
-        cargarWebService();
-
-        binding.button.setOnClickListener(view -> {
-            Intent intent = new Intent(Cuentas.this, OperacionesBancarias.class);
-            startActivity(intent);
-        });
-
+        usuarios.setSaldo(parametros.getInt("bill_amount"));
     }
-
     private void setAdapter() {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this.getBaseContext());
         binding.Recyclerview.setLayoutManager(new LinearLayoutManager(this));
@@ -69,9 +70,9 @@ public class Cuentas extends AppCompatActivity {
         binding.Recyclerview.setHasFixedSize(true);
         binding.Recyclerview.setAdapter(adapter);
     }
-
     private void cargarWebService() {
-
+        numeroCuenta = usuarios.getNumeroCuenta();
+        token = usuarios.getToken();
         HashMap<String, String> paramsAuth = new HashMap<>();
         paramsAuth.put("numberBill", numeroCuenta);
         try {
@@ -83,11 +84,11 @@ public class Cuentas extends AppCompatActivity {
                     new Response.Listener<JSONObject>() {
                         public void onResponse(JSONObject response) {
                             Log.e("Response", "onResponse: " + response.toString());
-                            if (response.optBoolean("status")){
-                                JSONArray dataArray=response.optJSONArray("data");
-                                for (int i = 0; i <dataArray.length() ; i++) {
+                            if (response.optBoolean("status")) {
+                                JSONArray dataArray = response.optJSONArray("data");
+                                for (int i = 0; i < dataArray.length(); i++) {
                                     try {
-                                        HistorialCuenta transf =new HistorialCuenta();
+                                        HistorialCuenta transf = new HistorialCuenta();
                                         transf.setType(dataArray.getJSONObject(i).optString("transaction_type"));
                                         transf.setDescription(dataArray.getJSONObject(i).optString("transaction_description"));
                                         transf.setAmount(dataArray.getJSONObject(i).optString("transaction_amount"));
@@ -121,5 +122,23 @@ public class Cuentas extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    private void volverOperaciones() {
+
+        binding.button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Cuentas.this, OperacionesBancarias.class);
+                Bundle bundle = new Bundle();
+                bundle.putString("user_name", usuarios.getName());
+                bundle.putString("user_identification", usuarios.getIdentificacion());
+                bundle.putString("user_email", usuarios.getMail());
+                bundle.putString("numCuenta", usuarios.getNumeroCuenta());
+                bundle.putInt("bill_amount", usuarios.getSaldo());
+                bundle.putString("token", usuarios.getToken());
+                intent.putExtras(bundle);
+                startActivity(intent);
+            }
+        });
     }
 }

@@ -46,11 +46,15 @@ public class Retirar extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityRetirarBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        onClick();
+    }
 
-        Bundle parametros = this.getIntent().getExtras();
-        usuarios.setNumeroCuenta(parametros.getString("numCuenta"));
-        usuarios.setToken(parametros.getString("token"));
+    private void onClick() {
+        recibirParametros();
+        retirarando();
+    }
 
+    private void retirarando() {
         binding.btnRetirar.setOnClickListener(view -> {
             dialogo("Retirando");
             amount = binding.montoRetirar.getText().toString();
@@ -61,13 +65,28 @@ public class Retirar extends AppCompatActivity {
 
             if (amount.isEmpty() && confirmAmount.isEmpty()) {
                 Toast.makeText(this, "Llene todos los campos", Toast.LENGTH_LONG).show();
+                pDialog.dismiss();
             } else if (!amount.equals(confirmAmount)) {
                 Toast.makeText(this, "Vefirifique el monto", Toast.LENGTH_SHORT).show();
+                pDialog.dismiss();
+            } else if (Integer.parseInt(amount)<1000) {
+                Toast.makeText(this, "Monto minimo de mil", Toast.LENGTH_SHORT).show();
+                pDialog.dismiss();
             } else {
                 cargarWebService();
             }
 
         });
+    }
+
+    private void recibirParametros() {
+        Bundle parametros = this.getIntent().getExtras();
+        usuarios.setName(parametros.getString("user_name"));
+        usuarios.setIdentificacion(parametros.getString("user_identification"));
+        usuarios.setMail(parametros.getString("user_email"));
+        usuarios.setNumeroCuenta(parametros.getString("numCuenta"));
+        usuarios.setToken(parametros.getString("token"));
+        usuarios.setSaldo(parametros.getInt("bill_amount"));
     }
 
     private void cargarWebService() {
@@ -130,16 +149,15 @@ public class Retirar extends AppCompatActivity {
                             if (response.optBoolean("status")) {
                                 Log.e("Response", "if: " + response.toString());
                                 pDialog.dismiss();
-                               new AlertDialog.Builder(Retirar.this)
-                                       .setTitle("Retiro exitoso")
-                                       .setMessage("Volver a operaciones")
-                                       .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                           @Override
-                                           public void onClick(DialogInterface dialog, int which) {
-                                               Intent intent = new Intent(Retirar.this, OperacionesBancarias.class);
-                                               startActivity(intent);
-                                           }
-                                       }).show();
+                                new AlertDialog.Builder(Retirar.this)
+                                        .setTitle("Retiro exitoso")
+                                        .setMessage("Volver a operaciones")
+                                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                volverOperaciones();
+                                            }
+                                        }).show();
                             } else {
                                 Toast.makeText(getApplicationContext(), response.optString("msg"), Toast.LENGTH_LONG).show();
                             }
@@ -148,11 +166,13 @@ public class Retirar extends AppCompatActivity {
                     new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
+                            pDialog.dismiss();
                             Log.e("Error", "onErrorResponse: " + error.toString());
                         }
                     }) {
                 @Override
                 public Map<String, String> getHeaders() throws AuthFailureError {
+                    pDialog.dismiss();
                     Map<String, String> params = new HashMap<>();
                     params.put("Authorization", usuarios.getToken());
                     Log.e("Authorization2", params.toString());
@@ -163,6 +183,19 @@ public class Retirar extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private void volverOperaciones() {
+        Intent intent = new Intent(Retirar.this, OperacionesBancarias.class);
+        Bundle bundle = new Bundle();
+        bundle.putString("user_name", usuarios.getName());
+        bundle.putString("user_identification", usuarios.getIdentificacion());
+        bundle.putString("user_email", usuarios.getMail());
+        bundle.putString("numCuenta", usuarios.getNumeroCuenta());
+        bundle.putInt("bill_amount", usuarios.getSaldo());
+        bundle.putString("token", usuarios.getToken());
+        intent.putExtras(bundle);
+        startActivity(intent);
     }
 
     private void dialogo(String mensage) {
