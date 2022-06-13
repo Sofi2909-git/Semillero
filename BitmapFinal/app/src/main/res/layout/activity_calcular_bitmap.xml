@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="32dp"
+            android:text="BITMAP"
+            android:textColor="@color/cardview_dark_background"
+            android:textSize="20dp"
+            android:textAlignment="center"
+            android:textStyle="italic" />
+
+          <EditText
+              android:id="@+id/hexadecimal"
+              android:layout_width="322dp"
+              android:layout_height="wrap_content"
+              android:layout_marginStart="50dp"
+              android:layout_marginEnd="50dp"
+              android:text="00000000000000000000000000000000"
+              android:digits="ABCDEFabcdef1234567890"
+              android:hint="Ingrese un número hexadecimal"
+              android:maxLength="32" />
+
+        <Button
+            android:id="@+id/btnCalcular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="150dp"
+            android:text="Calcular" />
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/RecyclerId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:visibility="visible" />
+
+    </LinearLayout>
+
+</androidx.appcompat.widget.LinearLayoutCompat>
